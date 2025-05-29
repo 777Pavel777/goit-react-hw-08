@@ -1,0 +1,64 @@
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 24px;
+  background-color: transparent;
+  color: rgb(230, 234, 255);
+  border: 2px solid;
+  box-shadow: rgba(59, 88, 235, 0.5) 0px 5px 15px;
+  border-radius: 8px;
+}
+
+h1,
+h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #2a2a2a;
+  text-align: center;
+  margin: 0 0 24px 0;
+  color: rgb(230, 234, 255);
+  animation: 5s linear 750ms infinite normal none running lights;
+}
+
+@keyframes lights {
+  0% {
+    color: rgb(184, 190, 224);
+    text-shadow: rgba(255, 0, 170, 0.2) 0px 0px 1em,
+      rgba(255, 51, 187, 0.3) 0px 0px 0.125em,
+      rgba(255, 187, 51, 0) -1em -0.125em 0.5em,
+      rgba(51, 187, 255, 0) 1em 0.125em 0.5em;
+  }
+
+  30% {
+    color: rgb(209, 216, 250);
+    text-shadow: rgba(255, 0, 170, 0.5) 0px 0px 1em,
+      rgba(255, 51, 187, 0.5) 0px 0px 0.125em,
+      rgba(255, 187, 51, 0.2) -0.5em -0.125em 0.25em,
+      rgba(51, 187, 255, 0.4) 0.5em 0.125em 0.25em;
+  }
+
+  40% {
+    color: rgb(230, 234, 255);
+    text-shadow: rgba(255, 0, 170, 0.5) 0px 0px 1em,
+      rgba(255, 204, 238, 0.5) 0px 0px 0.125em,
+      rgba(255, 187, 51, 0.2) -0.25em -0.125em 0.125em,
+      rgba(51, 187, 255, 0.4) 0.25em 0.125em 0.125em;
+  }
+
+  70% {
+    color: rgb(209, 216, 250);
+    text-shadow: rgba(255, 0, 170, 0.5) 0px 0px 1em,
+      rgba(255, 51, 187, 0.5) 0px 0px 0.125em,
+      rgba(255, 187, 51, 0.2) 0.5em -0.125em 0.25em,
+      rgba(51, 187, 255, 0.4) -0.5em 0.125em 0.25em;
+  }
+
+  100% {
+    color: rgb(184, 190, 224);
+    text-shadow: rgba(255, 0, 170, 0.2) 0px 0px 1em,
+      rgba(255, 51, 187, 0.3) 0px 0px 0.125em,
+      rgba(255, 187, 51, 0) 1em -0.125em 0.5em,
+      rgba(51, 187, 255, 0) -1em 0.125em 0.5em;
+  }
+}
