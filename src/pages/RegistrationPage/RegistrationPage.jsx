@@ -4,7 +4,7 @@ import styles from './RegistrationPage.module.css';
 export default function RegistrationPage() {
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Register</h2>
+      <h1 className={styles.title}>Create Your Account</h1>
       <RegistrationForm />
     </div>
   );

@@ -1,5 +1,5 @@
 {
-  "name": "goit-react-hw-06",
+  "name": "goit-react-hw-08",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -13,10 +13,12 @@
     "@reduxjs/toolkit": "^2.8.2",
     "axios": "^1.9.0",
     "formik": "^2.4.6",
+    "lodash": "^4.17.21",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hot-toast": "^2.5.2",
     "react-redux": "^9.2.0",
+    "react-router-dom": "^7.6.1",
     "redux-persist": "^6.0.0",
     "uuid": "^11.1.0",
     "yup": "^1.6.1"

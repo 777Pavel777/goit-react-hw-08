@@ -1,64 +1,95 @@
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addContact } from '../../redux/contactsOps';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import { addContact } from '../../redux/contacts/operations';
+import { toast } from 'react-hot-toast';
 import styles from './ContactForm.module.css';
 
 export default function ContactForm() {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(addContact({ name, number }));
-    setName('');
-    setNumber('');
-  };
+  const validationSchema = Yup.object({
+    name: Yup.string()
+      .min(3, 'Name must be at least 3 characters')
+      .required('Name is required'),
+    number: Yup.string()
+      .matches(
+        /^\d{3}-\d{3}-\d{4}$/,
+        'Phone number must be in format 123-456-7890'
+      )
+      .required('Phone number is required'),
+  });
 
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
-      <div className={styles.inputGroup}>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Name"
-          required
-          aria-label="Contact name"
-          className={styles.input}
-        />
-      </div>
-      <div className={styles.inputGroup}>
-        <input
-          type="tel"
-          value={number}
-          onChange={(e) => setNumber(e.target.value)}
-          placeholder="Phone Number"
-          required
-          aria-label="Contact phone number"
-          className={styles.input}
-        />
-      </div>
-      <button
-        className={styles.addButton}
-        type="submit"
-        aria-label="Add contact"
-      >
-        <svg
-          className={styles.addIcon}
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M12 5v14" />
-          <path d="M5 12h14" />
-        </svg>
-        Add Contact
-      </button>
-    </form>
+    <Formik
+      initialValues={{ name: '', number: '' }}
+      validationSchema={validationSchema}
+      onSubmit={(values, { setSubmitting, resetForm }) => {
+        dispatch(addContact(values))
+          .unwrap()
+          .then(() => {
+            toast.success('Contact added successfully!');
+            resetForm();
+          })
+          .catch(() => {
+            toast.error('Failed to add contact.');
+          });
+        setSubmitting(false);
+      }}
+    >
+      {({ isSubmitting }) => (
+        <Form className={styles.form}>
+          <div className={styles.inputGroup}>
+            <Field
+              type="text"
+              name="name"
+              placeholder="Name"
+              className={styles.input}
+              aria-label="Contact name"
+            />
+            <ErrorMessage
+              name="name"
+              component="div"
+              className={styles.error}
+            />
+          </div>
+          <div className={styles.inputGroup}>
+            <Field
+              type="tel"
+              name="number"
+              placeholder="123-456-7890"
+              className={styles.input}
+              aria-label="Contact phone number"
+            />
+            <ErrorMessage
+              name="number"
+              component="div"
+              className={styles.error}
+            />
+          </div>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className={styles.addButton}
+            aria-label="Add contact"
+          >
+            <svg
+              className={styles.addIcon}
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M12 5v14" />
+              <path d="M5 12h14" />
+            </svg>
+            Add Contact
+          </button>
+        </Form>
+      )}
+    </Formik>
   );
 }

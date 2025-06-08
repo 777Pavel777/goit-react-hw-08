@@ -13,6 +13,216 @@
 }
 
 .list {
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 2rem;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+
+  .list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    border-radius: 12px;
+  }
+
+  .item {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+  }
+
+  .item:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  .header {
+    font-weight: 600;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .column {
+    padding: 0 10px;
+    font-size: 1rem;
+    color: #ffffff;
+  }
+
+  .editForm {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .input {
+    padding: 8px;
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    transition: border-color 0.3s ease, background-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .input:focus {
+    outline: none;
+    border-color: #63b3ed;
+    background-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 8px rgba(99, 179, 237, 0.5);
+  }
+
+  .error {
+    color: #e53e3e;
+    font-size: 0.9rem;
+  }
+
+  .actionButtons {
+    display: flex;
+    gap: 10px;
+  }
+
+  .saveButton,
+  .cancelEditButton,
+  .editButton,
+  .deleteButton,
+  .confirmButton,
+  .cancelButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    font-size: 1rem;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .saveButton {
+    background-color: #3182ce;
+  }
+
+  .saveButton:hover {
+    background-color: #2b6cb0;
+    transform: scale(1.05);
+  }
+
+  .cancelEditButton {
+    background-color: #e53e3e;
+  }
+
+  .cancelEditButton:hover {
+    background-color: #c53030;
+    transform: scale(1.05);
+  }
+
+  .editButton {
+    background-color: #38a169;
+    margin-right: 10px;
+  }
+
+  .editButton:hover {
+    background-color: #2f855a;
+    transform: scale(1.05);
+  }
+
+  .deleteButton {
+    background-color: #e53e3e;
+  }
+
+  .deleteButton:hover {
+    background-color: #c53030;
+    transform: scale(1.05);
+  }
+
+  .saveIcon,
+  .cancelIcon,
+  .editIcon,
+  .deleteIcon {
+    width: 20px;
+    height: 20px;
+    stroke: #ffffff;
+  }
+
+  .modal {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 12px;
+    color: #ffffff;
+    text-align: center;
+  }
+
+  .modalButtons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 15px;
+  }
+
+  .confirmButton {
+    background-color: #3182ce;
+  }
+
+  .confirmButton:hover {
+    background-color: #2b6cb0;
+  }
+
+  .cancelButton {
+    background-color: #e53e3e;
+  }
+
+  .cancelButton:hover {
+    background-color: #c53030;
+  }
+
+  @media (max-width: 600px) {
+    .item,
+    .editForm {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      text-align: center;
+    }
+
+    .header {
+      display: none;
+    }
+
+    .column {
+      padding: 5px 0;
+    }
+
+    .editButton,
+    .deleteButton {
+      margin: 0 auto;
+    }
+
+    .actionButtons {
+      justify-content: center;
+    }
+  }
   list-style: none;
   padding: 0;
   margin: 0;
@@ -41,6 +251,7 @@
 }
 
 .column {
+  display: flex;
   padding: 0 10px;
   font-size: 1rem;
   color: #ffffff;

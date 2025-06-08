@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 16px;
   padding: 20px;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   max-width: 500px;
   margin: 0 auto 20px;
@@ -20,7 +20,7 @@
   padding: 12px;
   font-size: 1rem;
   color: #ffffff;
-  background-color: transparent;
+  background-color: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 8px;
   transition: border-color 0.3s ease, background-color 0.3s ease,
@@ -38,6 +38,11 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
+.error {
+  color: #e53e3e;
+  font-size: 0.9rem;
+}
+
 .addButton {
   display: flex;
   align-items: center;
@@ -48,6 +53,7 @@
   font-weight: 500;
   color: #ffffff;
   background-color: #3182ce;
+  border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease,
