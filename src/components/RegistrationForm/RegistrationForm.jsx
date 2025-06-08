@@ -56,7 +56,6 @@ export default function RegistrationForm() {
               errorMessage = JSON.stringify(error.details);
             }
             toast.error(errorMessage);
-            console.log('Registration error details:', error);
           })
           .finally(() => {
             setSubmitting(false);

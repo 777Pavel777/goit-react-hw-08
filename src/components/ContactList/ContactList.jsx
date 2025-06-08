@@ -33,6 +33,7 @@ export default function ContactList() {
   const validationSchema = Yup.object({
     name: Yup.string()
       .min(3, 'Name must be at least 3 characters')
+      .max(50, 'Name must be at most 50 characters')
       .required('Name is required'),
     number: Yup.string()
       .matches(
@@ -55,6 +56,7 @@ export default function ContactList() {
                   .unwrap()
                   .then(() => {
                     toast.success('Contact deleted successfully!');
+                    dispatch(fetchContacts()); // Оновлення списку
                   })
                   .catch(() => {
                     toast.error('Failed to delete contact.');
@@ -116,11 +118,14 @@ export default function ContactList() {
                       .then(() => {
                         toast.success('Contact updated successfully!');
                         setEditingId(null);
+                        dispatch(fetchContacts()); // Оновлення списку
                       })
                       .catch(() => {
                         toast.error('Failed to update contact.');
+                      })
+                      .finally(() => {
+                        setSubmitting(false);
                       });
-                    setSubmitting(false);
                   }}
                 >
                   {({ isSubmitting }) => (
