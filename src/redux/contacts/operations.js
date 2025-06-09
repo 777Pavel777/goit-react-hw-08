@@ -11,6 +11,7 @@ export const fetchContacts = createAsyncThunk(
       const state = thunkAPI.getState();
       const token = state.auth.token;
       if (!token) {
+        console.error('No token provided for fetchContacts');
         return thunkAPI.rejectWithValue({
           message: 'No token provided',
           status: 401,
@@ -18,14 +19,18 @@ export const fetchContacts = createAsyncThunk(
       }
       setAuthHeader(token);
       const response = await axios.get('/contacts');
-      console.log('Fetch contacts response:', response.data);
       return response.data;
     } catch (error) {
       const errorData = error.response?.data || {};
-      console.log('Fetch contacts error:', errorData);
+      console.error('Fetch contacts error:', {
+        status: error.response?.status,
+        message: errorData.message || 'Failed to fetch contacts',
+        details: errorData,
+      });
       return thunkAPI.rejectWithValue({
         message: errorData.message || 'Failed to fetch contacts',
         status: error.response?.status || 500,
+        details: errorData,
       });
     }
   }
@@ -38,6 +43,7 @@ export const addContact = createAsyncThunk(
       const state = thunkAPI.getState();
       const token = state.auth.token;
       if (!token) {
+        console.error('No token provided for addContact');
         return thunkAPI.rejectWithValue({
           message: 'No token provided',
           status: 401,
@@ -47,14 +53,18 @@ export const addContact = createAsyncThunk(
       const response = await axios.post('/contacts', contact, {
         headers: { 'Content-Type': 'application/json' },
       });
-      console.log('Add contact response:', response.data);
       return response.data;
     } catch (error) {
       const errorData = error.response?.data || {};
-      console.log('Add contact error:', errorData);
+      console.error('Add contact error:', {
+        status: error.response?.status,
+        message: errorData.message || 'Failed to add contact',
+        details: errorData,
+      });
       return thunkAPI.rejectWithValue({
         message: errorData.message || 'Failed to add contact',
         status: error.response?.status || 500,
+        details: errorData,
       });
     }
   }
@@ -67,21 +77,25 @@ export const deleteContact = createAsyncThunk(
       const state = thunkAPI.getState();
       const token = state.auth.token;
       if (!token) {
+        console.error('No token provided for deleteContact');
         return thunkAPI.rejectWithValue({
           message: 'No token provided',
           status: 401,
         });
       }
       setAuthHeader(token);
-      const response = await axios.delete(`/contacts/${id}`);
-      console.log('Delete contact response:', response.data);
       return { id };
     } catch (error) {
       const errorData = error.response?.data || {};
-      console.log('Delete contact error:', errorData);
+      console.error('Delete contact error:', {
+        status: error.response?.status,
+        message: errorData.message || 'Failed to delete contact',
+        details: errorData,
+      });
       return thunkAPI.rejectWithValue({
         message: errorData.message || 'Failed to delete contact',
         status: error.response?.status || 500,
+        details: errorData,
       });
     }
   }
@@ -94,6 +108,7 @@ export const updateContact = createAsyncThunk(
       const state = thunkAPI.getState();
       const token = state.auth.token;
       if (!token) {
+        console.error('No token provided for updateContact');
         return thunkAPI.rejectWithValue({
           message: 'No token provided',
           status: 401,
@@ -107,14 +122,18 @@ export const updateContact = createAsyncThunk(
           headers: { 'Content-Type': 'application/json' },
         }
       );
-      console.log('Update contact response:', response.data);
       return response.data;
     } catch (error) {
       const errorData = error.response?.data || {};
-      console.log('Update contact error:', errorData);
+      console.error('Update contact error:', {
+        status: error.response?.status,
+        message: errorData.message || 'Failed to update contact',
+        details: errorData,
+      });
       return thunkAPI.rejectWithValue({
         message: errorData.message || 'Failed to update contact',
         status: error.response?.status || 500,
+        details: errorData,
       });
     }
   }

@@ -56,26 +56,39 @@ export default function ContactList() {
                   .unwrap()
                   .then(() => {
                     toast.success('Contact deleted successfully!');
-                    dispatch(fetchContacts()); // Оновлення списку
+                    dispatch(fetchContacts());
                   })
-                  .catch(() => {
-                    toast.error('Failed to delete contact.');
+                  .catch((err) => {
+                    console.error('Delete error:', {
+                      message: err.message,
+                      status: err.status,
+                      details: err.details,
+                    });
+                    toast.error(
+                      `Failed to delete contact: ${
+                        err.message || 'Unknown error'
+                      }`
+                    );
+                  })
+                  .finally(() => {
+                    toast.dismiss(t.id);
                   });
-                toast.dismiss(t.id);
               }}
             >
               Yes
             </button>
             <button
               className={styles.cancelButton}
-              onClick={() => toast.dismiss(t.id)}
+              onClick={() => {
+                toast.dismiss(t.id);
+              }}
             >
               No
             </button>
           </div>
         </div>
       ),
-      { duration: Infinity }
+      { duration: 5000 }
     );
   };
 
@@ -118,10 +131,11 @@ export default function ContactList() {
                       .then(() => {
                         toast.success('Contact updated successfully!');
                         setEditingId(null);
-                        dispatch(fetchContacts()); // Оновлення списку
+                        dispatch(fetchContacts());
                       })
-                      .catch(() => {
-                        toast.error('Failed to update contact.');
+                      .catch((err) => {
+                        console.error('Update error:', err);
+                        toast.error(`Failed to update contact: ${err.message}`);
                       })
                       .finally(() => {
                         setSubmitting(false);
